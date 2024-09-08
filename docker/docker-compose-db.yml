@@ -1,0 +1,16 @@
+services:
+  cheermuk-database:
+    container_name: cheermuk-database
+    build:
+      dockerfile: Dockerfile
+      context: ./database
+    image: postgres
+    environment:
+      - POSTGRES_DB=cheermuk
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - TZ=Asia/Seoul
+    volumes:
+      - ./database/initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
