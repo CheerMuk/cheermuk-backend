@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: local # default
+    group:
+      local:
+        - common
+
+---
+spring:
+  config.activate.on-profile: local
+  jpa:
+    hibernate:
+      ddl-auto: validate

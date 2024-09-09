@@ -3,7 +3,7 @@ create table members
 (
     id          bigint default nextval('seq_member') NOT NULL,
     nickname    varchar(255)                         NOT NULL,
-    role        varchar(50)                          NOT NULL,
+    user_role        varchar(50)                          NOT NULL,
     img_url     text                                 NULL,
     created_at  timestamp                            NOT NULL,
     modified_at timestamp,
@@ -18,8 +18,8 @@ create table restaurants
     id            bigint default nextval('seq_restaurant') NOT NULL,
     jibun_address jsonb                                    NULL,
     road_address  json                                     NULL,
-    latitude      decimal(10, 8)                           NULL,
-    longitude     decimal(11, 8)                           NULL,
+    latitude      numeric(10, 8)                           NULL,
+    longitude     numeric(11, 8)                           NULL,
     biz_type      varchar(100)                             NOT NULL,
     created_at    timestamp                                NOT NULL,
     modified_at   timestamp,
@@ -47,12 +47,12 @@ create table articles
     foreign key (restaurant_id) references restaurants (id)
 );
 
-create sequence seq_article_image start 1;
+create sequence seq_article_image increment 3 start 1;
 create table article_images
 (
     id          bigint default nextval('seq_article_image') NOT NULL,
     article_id  bigint                                      NOT NULL,
-    img_uri     text                                        NOT NULL,
+    img_url     text                                        NOT NULL,
     created_at  timestamp                                   NOT NULL,
     modified_at timestamp,
     primary key (id),
