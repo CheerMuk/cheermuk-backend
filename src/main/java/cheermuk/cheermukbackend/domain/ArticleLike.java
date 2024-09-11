@@ -1,6 +1,7 @@
 package cheermuk.cheermukbackend.domain;
 
-import cheermuk.cheermukbackend.domain.base.BaseEntity;
+import cheermuk.cheermukbackend.global.base.BaseEntity;
+import cheermuk.cheermukbackend.domain.member.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;

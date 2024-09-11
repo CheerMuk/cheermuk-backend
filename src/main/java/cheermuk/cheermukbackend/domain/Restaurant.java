@@ -1,6 +1,6 @@
 package cheermuk.cheermukbackend.domain;
 
-import cheermuk.cheermukbackend.domain.base.BaseSoftDeleteEntity;
+import cheermuk.cheermukbackend.global.base.BaseSoftDeleteEntity;
 import cheermuk.cheermukbackend.domain.constants.BizType;
 import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
 import io.hypersistence.utils.hibernate.type.json.JsonType;

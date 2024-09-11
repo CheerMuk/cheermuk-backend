@@ -1,7 +1,8 @@
-package cheermuk.cheermukbackend.domain;
+package cheermuk.cheermukbackend.domain.member.entity;
 
-import cheermuk.cheermukbackend.domain.base.BaseSoftDeleteEntity;
-import cheermuk.cheermukbackend.domain.constants.UserRole;
+import cheermuk.cheermukbackend.domain.member.dto.MemberPrincipal;
+import cheermuk.cheermukbackend.domain.member.entity.constants.UserRole;
+import cheermuk.cheermukbackend.global.base.BaseSoftDeleteEntity;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -31,4 +32,14 @@ public class Member extends BaseSoftDeleteEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole userRole;
+
+    private Member(String nickname, String imgUrl, UserRole userRole) {
+        this.nickname = nickname;
+        this.imgUrl = imgUrl;
+        this.userRole = userRole;
+    }
+
+    public static Member fromPrincipalWithOauth(MemberPrincipal memberPrincipal) {
+        return new Member(memberPrincipal.nickname(), memberPrincipal.imgUrl(), UserRole.MEMBER);
+    }
 }

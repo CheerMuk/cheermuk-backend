@@ -1,6 +1,7 @@
 package cheermuk.cheermukbackend.domain;
 
-import cheermuk.cheermukbackend.domain.base.BaseSoftDeleteEntity;
+import cheermuk.cheermukbackend.global.base.BaseSoftDeleteEntity;
+import cheermuk.cheermukbackend.domain.member.entity.Member;
 import io.hypersistence.utils.hibernate.type.array.IntArrayType;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
