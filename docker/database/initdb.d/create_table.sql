@@ -3,7 +3,7 @@ create table members
 (
     id          bigint default nextval('seq_member') NOT NULL,
     nickname    varchar(255)                         NOT NULL,
-    user_role        varchar(50)                          NOT NULL,
+    user_role   varchar(50)                          NOT NULL,
     img_url     text                                 NULL,
     created_at  timestamp                            NOT NULL,
     modified_at timestamp,
@@ -16,11 +16,13 @@ create sequence seq_restaurant start 1;
 create table restaurants
 (
     id            bigint default nextval('seq_restaurant') NOT NULL,
+    name          varchar(255)                             NOT NULL,
     jibun_address jsonb                                    NULL,
     road_address  json                                     NULL,
     latitude      numeric(10, 8)                           NULL,
     longitude     numeric(11, 8)                           NULL,
     biz_type      varchar(100)                             NOT NULL,
+    link          text                                     NULL,
     created_at    timestamp                                NOT NULL,
     modified_at   timestamp,
     deleted_at    timestamp,
@@ -38,7 +40,6 @@ create table articles
     view_cnt      bigint                                NOT NULL,
     like_cnt      bigint                                NOT NULL,
     rate          smallint[3]                           NOT NULL,
-    link          text                                  NULL,
     created_at    timestamp                             NOT NULL,
     modified_at   timestamp,
     deleted_at    timestamp,

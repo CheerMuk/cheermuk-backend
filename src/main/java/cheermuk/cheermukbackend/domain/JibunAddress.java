@@ -4,14 +4,22 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotBlank;
 
 @Getter
+@Validated
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class JibunAddress {
+    @NotBlank
     private String sido;
+    @NotBlank
     private String sigungu;
+    @NotBlank
     private String eupmeyondong;
     private String detail;
+    @NotBlank
     private String postCode;
 
     @Builder

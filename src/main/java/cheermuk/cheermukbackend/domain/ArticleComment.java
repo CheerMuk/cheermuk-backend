@@ -1,5 +1,6 @@
 package cheermuk.cheermukbackend.domain;
 
+import cheermuk.cheermukbackend.domain.article.entity.Article;
 import cheermuk.cheermukbackend.global.base.BaseMutableEntity;
 import cheermuk.cheermukbackend.domain.member.entity.Member;
 import lombok.*;
