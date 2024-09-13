@@ -1,4 +1,4 @@
-package cheermuk.cheermukbackend.domain;
+package cheermuk.cheermukbackend.domain.ArticleBookmark.entity;
 
 import cheermuk.cheermukbackend.domain.article.entity.Article;
 import cheermuk.cheermukbackend.domain.member.entity.Member;
@@ -22,11 +22,24 @@ public class ArticleBookmark extends BaseEntity {
 
     @ToString.Exclude
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "memberId")
+    @JoinColumn(name = "memberId", insertable = false, updatable = false)
     private Member member;
+    @Column(nullable = false)
+    private Long memberId;
 
     @ToString.Exclude
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "articleId")
+    @JoinColumn(name = "articleId", insertable = false, updatable = false)
     private Article article;
+    @Column(nullable = false)
+    private Long articleId;
+
+    private ArticleBookmark(Long memberId, Long articleId) {
+        this.memberId = memberId;
+        this.articleId = articleId;
+    }
+
+    public static ArticleBookmark of(Long memberId, Long articleId) {
+        return new ArticleBookmark(memberId, articleId);
+    }
 }

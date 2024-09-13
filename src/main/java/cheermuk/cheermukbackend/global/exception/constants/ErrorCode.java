@@ -15,6 +15,8 @@ public enum ErrorCode {
     OWNER_ARTICLE_CANT_LIKE(HttpStatus.BAD_REQUEST, "본인 게시글에는 좋아요를 추가/삭제할 수 없습니다."),
     ALREADY_EXISTS_LIKE(HttpStatus.BAD_REQUEST, "이미 좋아요를 추가했습니다."),
     NOT_FOUND_LIKE(HttpStatus.BAD_REQUEST, "좋아요가 추가되어있지 않습니다."),
+    ALREADY_EXISTS_BOOKMARK(HttpStatus.BAD_REQUEST, "이미 북마크에 추가되었습니다."),
+    NOT_FOUND_BOOKMARK(HttpStatus.BAD_REQUEST, "북마크가 추가되어있지 않습니다."),
 
     // Restaurant
     NOT_FOUND_RESTAURANT(HttpStatus.NOT_FOUND, "식당이 존재하지 않습니다."),
