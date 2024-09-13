@@ -1,4 +1,4 @@
-package cheermuk.cheermukbackend.domain;
+package cheermuk.cheermukbackend.domain.ArticleLike.entity;
 
 import cheermuk.cheermukbackend.domain.article.entity.Article;
 import cheermuk.cheermukbackend.domain.member.entity.Member;
@@ -22,11 +22,24 @@ public class ArticleLike extends BaseEntity {
 
     @ToString.Exclude
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "articleId")
+    @JoinColumn(name = "articleId", insertable = false, updatable = false)
     private Article article;
+    @Column(nullable = false)
+    private Long articleId;
 
     @ToString.Exclude
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "memberId")
+    @JoinColumn(name = "memberId", insertable = false, updatable = false)
     private Member member;
+    @Column(nullable = false)
+    private Long memberId;
+
+    private ArticleLike(Long articleId, Long memberId) {
+        this.articleId = articleId;
+        this.memberId = memberId;
+    }
+
+    public static ArticleLike of(Long articleId, Long memberId) {
+        return new ArticleLike(articleId, memberId);
+    }
 }

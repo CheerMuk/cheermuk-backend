@@ -5,6 +5,7 @@ import org.locationtech.jts.geom.Point;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -21,8 +22,13 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
                             on a.restaurant_id = r_id.id
                             order by a.created_at desc
                             """)
-    Page<Article> findAllNearest(
-            @Param("point") Point point, @Param("meter") Integer distance, Pageable pageable);
+    Page<Article> findAllNearest(@Param("point") Point point, @Param("meter") Integer distance, Pageable pageable);
 
     Page<Article> findAllByMemberId(Long memberId, Pageable pageable);
+
+    boolean existsByIdAndMemberId(Long articleId, Long memberId);
+
+    @Modifying
+    @Query("update Article a set a.likeCnt = a.likeCnt + :cnt where a.id = :id")
+    void updateLikeCnt(@Param("id") Long articleId, @Param("cnt") long updateCount);
 }

@@ -3,7 +3,7 @@ package cheermuk.cheermukbackend.domain.Restaurant.entity;
 import cheermuk.cheermukbackend.domain.JibunAddress;
 import cheermuk.cheermukbackend.domain.Restaurant.dto.RestaurantRequest;
 import cheermuk.cheermukbackend.domain.RoadAddress;
-import cheermuk.cheermukbackend.domain.constants.BizType;
+import cheermuk.cheermukbackend.domain.Restaurant.entity.constants.BizType;
 import cheermuk.cheermukbackend.global.base.BaseSoftDeleteEntity;
 import cheermuk.cheermukbackend.global.utils.GeomUtils;
 import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;

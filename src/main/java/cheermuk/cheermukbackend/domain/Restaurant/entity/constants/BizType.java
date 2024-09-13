@@ -1,4 +1,4 @@
-package cheermuk.cheermukbackend.domain.constants;
+package cheermuk.cheermukbackend.domain.Restaurant.entity.constants;
 
 public enum BizType {
     SNACK_FOOD("분식"),
