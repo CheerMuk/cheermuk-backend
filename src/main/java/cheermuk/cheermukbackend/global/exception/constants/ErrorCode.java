@@ -14,7 +14,10 @@ public enum ErrorCode {
     NOT_FOUND_ARTICLE(HttpStatus.NOT_FOUND, "게시글이 존재하지 않습니다."),
 
     // Restaurant
-    NOT_FOUND_RESTAURANT(HttpStatus.NOT_FOUND, "식당이 존재하지 않습니다.");
+    NOT_FOUND_RESTAURANT(HttpStatus.NOT_FOUND, "식당이 존재하지 않습니다."),
+
+    // Comment
+    FORBIDDEN_COMMENT(HttpStatus.FORBIDDEN, "댓글에 대한 권한이 없습니다.");
 
     private final HttpStatus status;
     private final String message;
