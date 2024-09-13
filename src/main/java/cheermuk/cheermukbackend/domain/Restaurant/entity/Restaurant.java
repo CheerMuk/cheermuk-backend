@@ -5,14 +5,16 @@ import cheermuk.cheermukbackend.domain.Restaurant.dto.RestaurantRequest;
 import cheermuk.cheermukbackend.domain.RoadAddress;
 import cheermuk.cheermukbackend.domain.constants.BizType;
 import cheermuk.cheermukbackend.global.base.BaseSoftDeleteEntity;
+import cheermuk.cheermukbackend.global.utils.GeomUtils;
 import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import lombok.*;
 import org.hibernate.annotations.*;
+import org.locationtech.jts.geom.Point;
 
-import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Entity
@@ -44,10 +46,8 @@ public class Restaurant extends BaseSoftDeleteEntity {
     @Column(columnDefinition = "json")
     private RoadAddress roadAddress;
 
-    @Column(columnDefinition = "Numeric(10, 8)")
-    private Double latitude;
-    @Column(columnDefinition = "Numeric(11, 8)")
-    private Double longitude;
+    @Column(columnDefinition = "geometry(Point, 4326)")
+    private Point coordinates;
 
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
@@ -57,12 +57,17 @@ public class Restaurant extends BaseSoftDeleteEntity {
     private String link;
 
     @Builder
-    private Restaurant(String name, JibunAddress jibunAddress, RoadAddress roadAddress, Double latitude, Double longitude, BizType bizType, String link) {
+    private Restaurant(
+            String name,
+            JibunAddress jibunAddress,
+            RoadAddress roadAddress,
+            Point coordinates,
+            BizType bizType,
+            String link) {
         this.name = name;
         this.jibunAddress = jibunAddress;
         this.roadAddress = roadAddress;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.coordinates = coordinates;
         this.bizType = bizType;
         this.link = link;
     }
@@ -72,8 +77,7 @@ public class Restaurant extends BaseSoftDeleteEntity {
                 .name(restaurantRequest.name())
                 .jibunAddress(restaurantRequest.jibunAddress())
                 .roadAddress(restaurantRequest.roadAddress())
-                .latitude(restaurantRequest.latitude())
-                .longitude(restaurantRequest.longitude())
+                .coordinates(GeomUtils.createPoint(restaurantRequest.latitude(), restaurantRequest.longitude()))
                 .bizType(restaurantRequest.bizType())
                 .link(restaurantRequest.link())
                 .build();

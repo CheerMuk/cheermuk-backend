@@ -3,6 +3,7 @@ package cheermuk.cheermukbackend.domain.article.entity;
 import cheermuk.cheermukbackend.domain.Restaurant.entity.Restaurant;
 import cheermuk.cheermukbackend.domain.article.dto.ArticleRequest;
 import cheermuk.cheermukbackend.domain.member.entity.Member;
+import cheermuk.cheermukbackend.global.ShortArrayType;
 import cheermuk.cheermukbackend.global.base.BaseSoftDeleteEntity;
 import io.hypersistence.utils.hibernate.type.array.IntArrayType;
 import lombok.*;
@@ -18,7 +19,7 @@ import javax.persistence.*;
 @ToString(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@TypeDef(name = "int-array", typeClass = IntArrayType.class)
+@TypeDef(name = "short-array", typeClass = ShortArrayType.class)
 @SQLDelete(sql = "UPDATE articles SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
 @Where(clause = "deleted_at is null")
 @DynamicUpdate
@@ -32,14 +33,17 @@ public class Article extends BaseSoftDeleteEntity {
 
     @Column(nullable = false)
     private String title;
+
     @Column(nullable = false)
     private String content;
+
     @Column(nullable = false)
     private long viewCnt;
+
     @Column(nullable = false)
     private long likeCnt;
 
-    @Type(type = "int-array")
+    @Type(type = "short-array")
     @Column(columnDefinition = "smallint[3]")
     private Short[] rate = new Short[3]; // taste_rate, price_rate, service_rate
 
@@ -47,6 +51,7 @@ public class Article extends BaseSoftDeleteEntity {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId", updatable = false, insertable = false)
     private Member member;
+
     @Column(nullable = false)
     private Long memberId;
 
@@ -54,6 +59,7 @@ public class Article extends BaseSoftDeleteEntity {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurantId", updatable = false, insertable = false)
     private Restaurant restaurant;
+
     @Column(nullable = false)
     private Long restaurantId;
 
@@ -72,6 +78,7 @@ public class Article extends BaseSoftDeleteEntity {
                 .content(articleRequest.content())
                 .rate(articleRequest.rate())
                 .restaurantId(articleRequest.restaurantId())
-                .memberId(memberId).build();
+                .memberId(memberId)
+                .build();
     }
 }

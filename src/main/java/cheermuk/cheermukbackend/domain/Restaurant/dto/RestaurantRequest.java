@@ -16,6 +16,4 @@ public record RestaurantRequest(
         @NotNull @Positive Double latitude,
         @NotNull @Positive Double longitude,
         @NotNull BizType bizType,
-        String link
-) {
-}
+        String link) {}

@@ -19,8 +19,7 @@ public enum BizType {
     BUFFET("뷔페"),
     FOREIGN_FOOD("외국음식전문점"),
     RAW_FISH("횟집"),
-    ETC("기타")
-    ;
+    ETC("기타");
 
     private final String name;
 

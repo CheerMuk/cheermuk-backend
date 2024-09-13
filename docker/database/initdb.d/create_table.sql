@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS postgis;
+
 create sequence seq_member start 1;
 create table members
 (
@@ -19,8 +21,7 @@ create table restaurants
     name          varchar(255)                             NOT NULL,
     jibun_address jsonb                                    NULL,
     road_address  json                                     NULL,
-    latitude      numeric(10, 8)                           NULL,
-    longitude     numeric(11, 8)                           NULL,
+    coordinates   geometry(POINT, 4326)                   NULL,
     biz_type      varchar(100)                             NOT NULL,
     link          text                                     NULL,
     created_at    timestamp                                NOT NULL,
@@ -28,6 +29,7 @@ create table restaurants
     deleted_at    timestamp,
     primary key (id)
 );
+create index restaurants_coordinates_idx on restaurants using gist (coordinates);
 
 create sequence seq_article start 1;
 create table articles

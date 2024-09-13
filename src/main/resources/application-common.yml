@@ -3,9 +3,11 @@ spring:
   jpa:
     show-sql: true
     properties.hibernate:
-        format_sql: true
+      format_sql: true
     open-in-view: true
+    database-platform: cheermuk.cheermukbackend.global.config.PostgreSQL94CustomDialect
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+decorator.datasource.p6spy.enable-logging: true

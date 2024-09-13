@@ -20,7 +20,9 @@ public class RestaurantService {
     }
 
     public Restaurant getRestaurant(Long restaurantId) {
-        return restaurantRepository.findById(restaurantId).orElseThrow(() -> new RestaurantException(ErrorCode.NOT_FOUND_RESTAURANT));
+        return restaurantRepository
+                .findById(restaurantId)
+                .orElseThrow(() -> new RestaurantException(ErrorCode.NOT_FOUND_RESTAURANT));
     }
 
     public Restaurant addRestaurant(RestaurantRequest restaurantRequest) {

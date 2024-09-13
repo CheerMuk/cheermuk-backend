@@ -12,10 +12,8 @@ public record ArticleResponse(
         String content,
         Long viewCnt,
         Long likeCnt,
-        String link,
         Short[] rate,
-        Timestamp createdAt
-) {
+        Timestamp createdAt) {
     public static ArticleResponse fromEntity(Article article) {
         return ArticleResponse.builder()
                 .id(article.getId())
@@ -24,6 +22,7 @@ public record ArticleResponse(
                 .viewCnt(article.getViewCnt())
                 .likeCnt(article.getLikeCnt())
                 .rate(article.getRate())
-                .createdAt(article.getCreatedAt()).build();
+                .createdAt(article.getCreatedAt())
+                .build();
     }
 }

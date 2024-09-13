@@ -8,5 +8,4 @@ public record ArticleRequest(
         @NotBlank String title,
         @NotBlank String content,
         @NotNull @Size(min = 3, max = 3) Short[] rate,
-        @NotNull Long restaurantId) {
-}
+        @NotNull Long restaurantId) {}

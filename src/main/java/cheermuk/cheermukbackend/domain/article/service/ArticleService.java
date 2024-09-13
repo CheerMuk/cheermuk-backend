@@ -5,6 +5,7 @@ import cheermuk.cheermukbackend.domain.article.entity.Article;
 import cheermuk.cheermukbackend.domain.article.repository.ArticleRepository;
 import cheermuk.cheermukbackend.global.exception.ArticleException;
 import cheermuk.cheermukbackend.global.exception.constants.ErrorCode;
+import cheermuk.cheermukbackend.global.utils.GeomUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,8 +20,14 @@ public class ArticleService {
         return articleRepository.findAll(pageable);
     }
 
+    public Page<Article> getNearestArticles(Double latitude, Double longitude, Integer distance, Pageable pageable) {
+        return articleRepository.findAllNearest(GeomUtils.createPoint(latitude, longitude), distance, pageable);
+    }
+
     public Article getArticle(Long articleId) {
-        return articleRepository.findById(articleId).orElseThrow(() -> new ArticleException(ErrorCode.NOT_FOUND_ARTICLE));
+        return articleRepository
+                .findById(articleId)
+                .orElseThrow(() -> new ArticleException(ErrorCode.NOT_FOUND_ARTICLE));
     }
 
     public Article addArticle(ArticleRequest articleRequest, Long memberId) {

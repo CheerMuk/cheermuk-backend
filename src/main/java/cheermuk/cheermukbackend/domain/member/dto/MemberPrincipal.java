@@ -21,13 +21,6 @@ public record MemberPrincipal(
         Map<String, Object> oAuth2Attributes
 ) implements UserDetails, OAuth2User {
 
-    public static class MemberPrincipalBuilder {
-        public MemberPrincipalBuilder authorities(UserRole userRole) {
-            this.authorities = Set.of(new SimpleGrantedAuthority(userRole.getName()));
-            return this;
-        }
-    }
-
     public static MemberPrincipal fromEntity(Member member) {
         return MemberPrincipal.builder()
                 .id(member.getId())
@@ -80,5 +73,12 @@ public record MemberPrincipal(
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public static class MemberPrincipalBuilder {
+        public MemberPrincipalBuilder authorities(UserRole userRole) {
+            this.authorities = Set.of(new SimpleGrantedAuthority(userRole.getName()));
+            return this;
+        }
     }
 }

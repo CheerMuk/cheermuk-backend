@@ -33,6 +33,13 @@ public class ArticleController {
         return ResponseEntity.ok(articleService.getArticles(pageable).map(ArticleResponse::fromEntity));
     }
 
+    @GetMapping("/nearest")
+    public ResponseEntity<Page<ArticleResponse>> getNearestArticles(@RequestParam Double latitude, @RequestParam Double longitude, @RequestParam Integer distance, @PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(articleService
+                .getNearestArticles(latitude, longitude, distance, pageable)
+                .map(ArticleResponse::fromEntity));
+    }
+
     @GetMapping("/{articleId}")
     public ResponseEntity<ArticleResponse> getArticle(@PathVariable Long articleId) {
         return ResponseEntity.ok(ArticleResponse.fromEntity(articleService.getArticle(articleId)));

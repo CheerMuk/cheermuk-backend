@@ -1,12 +1,11 @@
 services:
-  cheermuk-database:
-    container_name: cheermuk-database
+  pickeat-database:
+    container_name: pickeat-database
     build:
       dockerfile: Dockerfile
       context: ./database
-    image: postgres
     environment:
-      - POSTGRES_DB=cheermuk
+      - POSTGRES_DB=pickeat
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - TZ=Asia/Seoul
@@ -14,3 +13,9 @@ services:
       - ./database/initdb.d:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
+    networks:
+      - pickeat_net
+
+networks:
+  pickeat_net:
+    driver: bridge

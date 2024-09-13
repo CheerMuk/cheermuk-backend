@@ -11,5 +11,4 @@ public class CheermukApplication {
     public static void main(String[] args) {
         SpringApplication.run(CheermukApplication.class, args);
     }
-
 }

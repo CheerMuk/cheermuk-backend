@@ -1,6 +1,5 @@
 package cheermuk.cheermukbackend.global.config.security;
 
-
 import cheermuk.cheermukbackend.domain.member.dto.MemberPrincipal;
 import cheermuk.cheermukbackend.domain.member.dto.OAuthAttributes;
 import cheermuk.cheermukbackend.domain.member.entity.constants.UserRole;
@@ -57,8 +56,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService(
-            MemberService memberService) {
+    public OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService(MemberService memberService) {
         final DefaultOAuth2UserService delegate = new DefaultOAuth2UserService();
 
         return userRequest -> {

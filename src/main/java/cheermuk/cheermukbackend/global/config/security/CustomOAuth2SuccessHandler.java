@@ -20,11 +20,10 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class CustomOAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-    private final TokenProvider tokenProvider;
-    private final MemberService memberService;
     private static final String TOKEN_COOKIE_NAME = "accessToken";
     private static final int COOKIE_MAX_AGE = 10 * 60; // 10분
-
+    private final TokenProvider tokenProvider;
+    private final MemberService memberService;
     @Value("${oauth2.redirect-uri}")
     private String REDIRECT_URI;
 

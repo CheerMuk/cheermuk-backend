@@ -23,7 +23,8 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
 
     @GetMapping
-    public ResponseEntity<Page<RestaurantResponse>> getRestaurants(@PageableDefault(sort = "createdAt", direction = DESC) Pageable pageable) {
+    public ResponseEntity<Page<RestaurantResponse>> getRestaurants(
+            @PageableDefault(sort = "createdAt", direction = DESC) Pageable pageable) {
         return ResponseEntity.ok(restaurantService.getRestaurants(pageable).map(RestaurantResponse::fromEntity));
     }
 
@@ -34,12 +35,15 @@ public class RestaurantController {
 
     @PostMapping
     public ResponseEntity<RestaurantResponse> addRestaurant(@RequestBody @Valid RestaurantRequest restaurantRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(RestaurantResponse.fromEntity(restaurantService.addRestaurant(restaurantRequest)));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(RestaurantResponse.fromEntity(restaurantService.addRestaurant(restaurantRequest)));
     }
 
     @PutMapping("/{restaurantId}")
-    public ResponseEntity<RestaurantResponse> updateRestaurant(@PathVariable Long restaurantId, @RequestBody @Valid RestaurantRequest restaurantRequest) {
-        return ResponseEntity.ok(RestaurantResponse.fromEntity(restaurantService.updateRestaurant(restaurantRequest, restaurantId)));
+    public ResponseEntity<RestaurantResponse> updateRestaurant(
+            @PathVariable Long restaurantId, @RequestBody @Valid RestaurantRequest restaurantRequest) {
+        return ResponseEntity.ok(
+                RestaurantResponse.fromEntity(restaurantService.updateRestaurant(restaurantRequest, restaurantId)));
     }
 
     @DeleteMapping("/{restaurantId}")
