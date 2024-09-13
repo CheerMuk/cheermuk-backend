@@ -24,6 +24,10 @@ public class ArticleService {
         return articleRepository.findAllNearest(GeomUtils.createPoint(latitude, longitude), distance, pageable);
     }
 
+    public Page<Article> getMyArticles(Pageable pageable, Long memberId) {
+        return articleRepository.findAllByMemberId(memberId, pageable);
+    }
+
     public Article getArticle(Long articleId) {
         return articleRepository
                 .findById(articleId)

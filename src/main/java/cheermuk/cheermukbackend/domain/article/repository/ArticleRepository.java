@@ -23,4 +23,6 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
                             """)
     Page<Article> findAllNearest(
             @Param("point") Point point, @Param("meter") Integer distance, Pageable pageable);
+
+    Page<Article> findAllByMemberId(Long memberId, Pageable pageable);
 }
