@@ -30,6 +30,13 @@ public record MemberPrincipal(
                 .build();
     }
 
+    public UserRole getUserRole() {
+        return authorities.stream()
+                .map(r -> UserRole.valueOf(r.getAuthority().substring(5)))
+                .findFirst()
+                .orElse(UserRole.ANONYMOUS);
+    }
+
     @Override
     public String getName() {
         return nickname;

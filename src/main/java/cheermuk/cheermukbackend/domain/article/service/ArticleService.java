@@ -3,6 +3,7 @@ package cheermuk.cheermukbackend.domain.article.service;
 import cheermuk.cheermukbackend.domain.article.dto.ArticleRequest;
 import cheermuk.cheermukbackend.domain.article.entity.Article;
 import cheermuk.cheermukbackend.domain.article.repository.ArticleRepository;
+import cheermuk.cheermukbackend.domain.member.entity.constants.UserRole;
 import cheermuk.cheermukbackend.global.exception.ArticleException;
 import cheermuk.cheermukbackend.global.exception.constants.ErrorCode;
 import cheermuk.cheermukbackend.global.utils.GeomUtils;
@@ -38,13 +39,20 @@ public class ArticleService {
         return articleRepository.save(Article.fromRequest(articleRequest, memberId));
     }
 
-    public Article updateArticle(Long articleId, ArticleRequest articleRequest, Long memberId) {
+    public Article updateArticle(Long articleId, ArticleRequest articleRequest, UserRole userRole, Long memberId) {
+        checkIfWriterOrAdmin(articleId, userRole, memberId);
         Article article = Article.fromRequest(articleRequest, memberId);
         article.setId(articleId);
         return articleRepository.save(article);
     }
 
-    public void deleteArticle(Long articleId) {
+    public void deleteArticle(Long articleId, UserRole userRole, Long memberId) {
+        checkIfWriterOrAdmin(articleId, userRole, memberId);
         articleRepository.deleteById(articleId);
+    }
+
+    public void checkIfWriterOrAdmin(Long articleId, UserRole role, Long memberId) {
+        if (role != UserRole.ADMIN && !articleRepository.existsByIdAndMemberId(articleId, memberId))
+            throw new ArticleException(ErrorCode.FORBIDDEN_ARTICLE);
     }
 }

@@ -1,4 +1,4 @@
-package cheermuk.cheermukbackend.domain;
+package cheermuk.cheermukbackend.domain.Restaurant.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;

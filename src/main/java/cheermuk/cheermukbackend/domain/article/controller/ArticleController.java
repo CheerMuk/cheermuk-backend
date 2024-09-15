@@ -59,13 +59,13 @@ public class ArticleController {
 
     @PutMapping("/{articleId}")
     public ResponseEntity<ArticleResponse> updateArticle(@PathVariable Long articleId, @RequestBody @Valid ArticleRequest articleRequest, @AuthenticationPrincipal MemberPrincipal memberPrincipal) {
-        ArticleResponse articleResponse = ArticleResponse.fromEntity(articleService.updateArticle(articleId, articleRequest, memberPrincipal.id()));
+        ArticleResponse articleResponse = ArticleResponse.fromEntity(articleService.updateArticle(articleId, articleRequest, memberPrincipal.getUserRole(), memberPrincipal.id()));
         return ResponseEntity.ok(articleResponse);
     }
 
     @DeleteMapping("/{articleId}")
-    public ResponseEntity<Void> deleteArticle(@PathVariable Long articleId) {
-        articleService.deleteArticle(articleId);
+    public ResponseEntity<Void> deleteArticle(@PathVariable Long articleId, @AuthenticationPrincipal MemberPrincipal memberPrincipal) {
+        articleService.deleteArticle(articleId, memberPrincipal.getUserRole(), memberPrincipal.id());
         return ResponseEntity.noContent().build();
     }
 }

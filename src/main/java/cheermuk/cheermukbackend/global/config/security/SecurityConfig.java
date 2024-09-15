@@ -22,11 +22,6 @@ import org.springframework.security.web.access.ExceptionTranslationFilter;
 public class SecurityConfig {
 
     @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/imgs/**", "/chat/**");
-    }
-
-    @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http,
             OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService,

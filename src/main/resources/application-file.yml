@@ -1,0 +1,9 @@
+spring:
+  config.activate.on-profile: file
+  servlet:
+    multipart:
+      max-file-size: 3MB
+      max-request-size: 10MB
+local-file:
+  path: ${LOCAL_FILE_PATH} # 파일 저장 경로
+

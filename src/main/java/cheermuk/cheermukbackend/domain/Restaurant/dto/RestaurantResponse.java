@@ -1,8 +1,8 @@
 package cheermuk.cheermukbackend.domain.Restaurant.dto;
 
-import cheermuk.cheermukbackend.domain.JibunAddress;
+import cheermuk.cheermukbackend.domain.Restaurant.entity.JibunAddress;
 import cheermuk.cheermukbackend.domain.Restaurant.entity.Restaurant;
-import cheermuk.cheermukbackend.domain.RoadAddress;
+import cheermuk.cheermukbackend.domain.Restaurant.entity.RoadAddress;
 import cheermuk.cheermukbackend.domain.Restaurant.entity.constants.BizType;
 import lombok.Builder;
 
