@@ -18,6 +18,7 @@ public class ArticleReport extends BaseEntity {
     @Id
     @SequenceGenerator(name = "REPORT_ID_GENERATOR", sequenceName = "seq_article_report", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REPORT_ID_GENERATOR")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Enumerated(EnumType.STRING)

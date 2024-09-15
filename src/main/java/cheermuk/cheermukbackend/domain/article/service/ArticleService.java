@@ -29,6 +29,10 @@ public class ArticleService {
         return articleRepository.findAllByMemberId(memberId, pageable);
     }
 
+    public Page<Article> getReportedArticles(Pageable pageable) {
+        return articleRepository.findAllByReportedAtNotNull(pageable);
+    }
+
     public Article getArticle(Long articleId) {
         return articleRepository
                 .findById(articleId)
@@ -56,7 +60,7 @@ public class ArticleService {
             throw new ArticleException(ErrorCode.FORBIDDEN_ARTICLE);
     }
 
-    public Page<Article> getReportedArticles(Pageable pageable) {
-        return articleRepository.findAllByReportedAtNotNull(pageable);
+    public void updateViewCnt(Long articleId) {
+        articleRepository.updateViewCnt(articleId);
     }
 }

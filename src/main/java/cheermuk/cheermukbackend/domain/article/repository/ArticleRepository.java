@@ -8,7 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(propagation = Propagation.SUPPORTS)
 public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Query(
             nativeQuery = true,
@@ -37,6 +40,11 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Modifying
     @Query("update Article a set a.likeCnt = a.likeCnt + :cnt where a.id = :id")
     void updateLikeCnt(@Param("id") Long articleId, @Param("cnt") long updateCount);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "update articles a set view_cnt = view_cnt + 1 where a.id = :id")
+    void updateViewCnt(@Param("id") Long articleId);
 
     @Modifying
     @Query("update Article a set a.reportedAt = CURRENT_TIMESTAMP where a.id = :id")
