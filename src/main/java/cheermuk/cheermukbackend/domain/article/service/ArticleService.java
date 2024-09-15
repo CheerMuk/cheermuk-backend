@@ -55,4 +55,8 @@ public class ArticleService {
         if (role != UserRole.ADMIN && !articleRepository.existsByIdAndMemberId(articleId, memberId))
             throw new ArticleException(ErrorCode.FORBIDDEN_ARTICLE);
     }
+
+    public Page<Article> getReportedArticles(Pageable pageable) {
+        return articleRepository.findAllByReportedAtNotNull(pageable);
+    }
 }

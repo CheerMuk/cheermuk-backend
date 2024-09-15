@@ -5,13 +5,13 @@ import cheermuk.cheermukbackend.domain.article.dto.ArticleRequest;
 import cheermuk.cheermukbackend.domain.member.entity.Member;
 import cheermuk.cheermukbackend.global.ShortArrayType;
 import cheermuk.cheermukbackend.global.base.BaseSoftDeleteEntity;
-import io.hypersistence.utils.hibernate.type.array.IntArrayType;
 import lombok.*;
 import org.hibernate.annotations.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Getter
 @Entity
@@ -21,7 +21,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @TypeDef(name = "short-array", typeClass = ShortArrayType.class)
 @SQLDelete(sql = "UPDATE articles SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
-@Where(clause = "deleted_at is null")
+@Where(clause = "deleted_at is null and reported_at is null")
 @DynamicUpdate
 public class Article extends BaseSoftDeleteEntity {
     @Id
@@ -62,6 +62,9 @@ public class Article extends BaseSoftDeleteEntity {
 
     @Column(nullable = false)
     private Long restaurantId;
+
+    @Column
+    private Timestamp reportedAt;
 
     @Builder
     private Article(String title, String content, Short[] rate, Long memberId, Long restaurantId) {

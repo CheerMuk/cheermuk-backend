@@ -21,7 +21,7 @@ create table restaurants
     name          varchar(255)                             NOT NULL,
     jibun_address jsonb                                    NULL,
     road_address  json                                     NULL,
-    coordinates   geometry(POINT, 4326)                   NULL,
+    coordinates   geometry(POINT, 4326)                    NULL,
     biz_type      varchar(100)                             NOT NULL,
     link          text                                     NULL,
     created_at    timestamp                                NOT NULL,
@@ -45,6 +45,7 @@ create table articles
     created_at    timestamp                             NOT NULL,
     modified_at   timestamp,
     deleted_at    timestamp,
+    reported_at   timestamp,
     primary key (id),
     foreign key (member_id) references members (id) on delete cascade,
     foreign key (restaurant_id) references restaurants (id)
@@ -99,4 +100,17 @@ create table article_bookmarks
     primary key (id),
     foreign key (member_id) references members (id) on delete cascade,
     foreign key (article_id) references articles (id) on delete cascade
+);
+
+create sequence seq_article_report start 1;
+create table article_reports
+(
+    id          bigint default nextval('seq_article_report') NOT NULL,
+    member_id   bigint                                       NOT NULL,
+    article_id  bigint                                       NOT NULL,
+    report_type varchar(100)                                 NOT NULL,
+    created_at  timestamp                                    NOT NULL,
+    primary key (id),
+    foreign key (member_id) references members (id) on delete cascade,
+    foreign key (article_id) references articles (id)
 );

@@ -47,6 +47,11 @@ public class ArticleController {
                 .map(ArticleResponse::fromEntity));
     }
 
+    @GetMapping("/report")
+    public ResponseEntity<Page<ArticleResponse>> getReportedArticles(@PageableDefault(sort = "created_at", direction = DESC) Pageable pageable) {
+        return ResponseEntity.ok(articleService.getReportedArticles(pageable).map(ArticleResponse::fromEntity));
+    }
+
     @GetMapping("/{articleId}")
     public ResponseEntity<ArticleResponse> getArticle(@PathVariable Long articleId) {
         return ResponseEntity.ok(ArticleResponse.fromEntity(articleService.getArticle(articleId)));

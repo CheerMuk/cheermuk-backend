@@ -26,9 +26,19 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     Page<Article> findAllByMemberId(Long memberId, Pageable pageable);
 
+    @Query(
+            nativeQuery = true,
+            countQuery = "select count(*) from articles where reported_at is not null",
+            value = "select * from articles a where a.reported_at is not null")
+    Page<Article> findAllByReportedAtNotNull(Pageable pageable);
+
     boolean existsByIdAndMemberId(Long articleId, Long memberId);
 
     @Modifying
     @Query("update Article a set a.likeCnt = a.likeCnt + :cnt where a.id = :id")
     void updateLikeCnt(@Param("id") Long articleId, @Param("cnt") long updateCount);
+
+    @Modifying
+    @Query("update Article a set a.reportedAt = CURRENT_TIMESTAMP where a.id = :id")
+    void updateReportedAtById(@Param("id") Long articleId);
 }
