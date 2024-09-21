@@ -17,16 +17,16 @@ public class JibunAddress {
     @NotBlank
     private String sigungu;
     @NotBlank
-    private String eupmeyondong;
+    private String eupmyeondong;
     private String detail;
     @NotBlank
     private String postCode;
 
     @Builder
-    private JibunAddress(String sido, String sigungu, String eupmeyondong, String detail, String postCode) {
+    private JibunAddress(String sido, String sigungu, String eupmyeondong, String detail, String postCode) {
         this.sido = sido;
         this.sigungu = sigungu;
-        this.eupmeyondong = eupmeyondong;
+        this.eupmyeondong = eupmyeondong;
         this.detail = detail;
         this.postCode = postCode;
     }
